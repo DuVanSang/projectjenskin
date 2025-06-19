@@ -6,6 +6,14 @@ pipeline {
                 {
                     git branch: 'main', url: 'https://github.com/huudqtmu/c2.git'
                 }
-}
+        }
+
+        stage ('Publish') {
+    		steps {
+    			echo 'public 2 runnig folder'
+    		//iisreset /stop // stop iis de ghi de file 
+    			bat 'xcopy "%WORKSPACE%\\publish" /E /Y /I /R "D:\\myproject"'
+     		}
+    	}
     }
 }
