@@ -1,21 +1,19 @@
 pipeline {
     agent any 
+
     stages {
-        stage ('Clone') {
+        stage('Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/DuVanSang/projectjenskin.git'
             }
         }
 
-        stage ('Publish') {
+        stage('Publish') {
             steps {
-                echo 'public 2 running folder'
+                echo 'Copying all repo contents to D:\\myproject'
 
-                // Nếu muốn stop IIS để ghi đè file, bỏ comment dòng dưới:
-                // bat 'iisreset /stop'
-
-                // Copy nội dung trong thư mục publish sang D:\myproject
-                bat 'xcopy "%WORKSPACE%\\publish\\*" "D:\\myproject" /E /Y /I /R'
+                // Copy toàn bộ nội dung thư mục hiện tại sang D:\myproject
+                bat 'xcopy "%WORKSPACE%\\*" "D:\\myproject" /E /Y /I /R'
             }
         }
     }
